@@ -1,0 +1,50 @@
+import time
+import random
+
+player_victory = 0
+enemy_victory = 0
+
+while True:
+    for i in range(1,4):
+        time.sleep(1.5)
+        print('  \n——————{} Round——————'.format(i))
+        player_life = random.randint(100,150)
+        player_attack = random.randint(30,50)
+        enemy_life = random.randint(100,150)
+        enemy_attack = random.randint(30,50)
+
+        print('【You】\n HP：{}\n Attack：{}'.format(player_life,player_attack))
+        print('------------------------')
+        time.sleep(1)
+        print('【Enemy】\n HP：{}\n Attack：{}'.format(enemy_life,enemy_attack))
+        print('-----------------------')
+        time.sleep(1)
+
+        while player_life > 0 and enemy_life > 0:
+            player_life = player_life - enemy_attack 
+            enemy_life = enemy_life - player_attack
+            print('Enemy attack，【Your HP】{}'.format(player_life))
+            print('You attack, 【Enemy HP】{}'.format(enemy_life))
+            print('-----------------------')
+            time.sleep(1.2)
+
+        if player_life > 0 and enemy_life <= 0:
+            player_victory += 1
+            print('The enemy is dead! You win!')
+        elif player_life <= 0 and enemy_life > 0:
+            enemy_victory += 1
+            print('The enemy killed you!')
+        else:
+            print('Oh dear, you are dead with the enemy！')
+
+    if player_victory > enemy_victory :
+        time.sleep(1)
+        print('\n【Final result: You Win!】')
+    elif enemy_victory > player_victory:
+        print('\n【Final result: You Lose!】')
+    else: 
+        print('\n【Final result: tie!】')
+
+    a1 = input('Want to continue the game? please enter n exit, enter other continue：')
+    if a1 == 'n':
+        break
